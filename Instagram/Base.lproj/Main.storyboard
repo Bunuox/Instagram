@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19115.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t69-tu-NBb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19115.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pc8-gO-LF0">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.5"/>
@@ -106,19 +106,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyP-en-S26">
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyP-en-S26">
                                 <rect key="frame" x="20" y="453" width="374" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="1aC-lI-NV0"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlu-ej-F1X">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlu-ej-F1X">
                                 <rect key="frame" x="179" y="535" width="58" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="J6r-mp-Qfy"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Post"/>
                                 <connections>
@@ -126,10 +121,9 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-J1-CjV">
-                                <rect key="frame" x="20" y="50" width="374" height="372"/>
+                                <rect key="frame" x="29" y="42" width="356" height="372"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="372" id="n50-5j-PTV"/>
-                                    <constraint firstAttribute="width" constant="374" id="vsB-YM-F38"/>
+                                    <constraint firstAttribute="height" constant="372" id="wMM-aS-OLU"/>
                                 </constraints>
                                 <imageReference key="image" image="image"/>
                             </imageView>
@@ -137,15 +131,11 @@
                         <viewLayoutGuide key="safeArea" id="vAl-8m-bam"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Vlu-ej-F1X" firstAttribute="top" secondItem="nyP-en-S26" secondAttribute="bottom" constant="48" id="5ZZ-EK-nld"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="trailing" secondItem="dN6-nv-8JY" secondAttribute="trailingMargin" id="ONC-jO-HiE"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="top" secondItem="vAl-8m-bam" secondAttribute="top" constant="50" id="P3U-qF-NFH"/>
-                            <constraint firstItem="nyP-en-S26" firstAttribute="top" secondItem="Jb1-J1-CjV" secondAttribute="bottom" constant="31" id="PJV-6K-9N0"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="leading" secondItem="dN6-nv-8JY" secondAttribute="leadingMargin" id="SYF-sL-FaI"/>
-                            <constraint firstItem="Vlu-ej-F1X" firstAttribute="leading" secondItem="vAl-8m-bam" secondAttribute="leading" constant="179" id="Vba-Xz-Ibo"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="leading" secondItem="nyP-en-S26" secondAttribute="leading" id="aNT-as-CEA"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="trailing" secondItem="nyP-en-S26" secondAttribute="trailing" id="iCD-5q-6aV"/>
-                            <constraint firstItem="vAl-8m-bam" firstAttribute="bottom" secondItem="Vlu-ej-F1X" secondAttribute="bottom" constant="117" id="lgA-Qh-4JG"/>
+                            <constraint firstItem="nyP-en-S26" firstAttribute="top" secondItem="Jb1-J1-CjV" secondAttribute="bottom" constant="39" id="0Zl-IB-TlV"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="centerX" secondItem="nyP-en-S26" secondAttribute="centerX" id="ExU-0K-fRG"/>
+                            <constraint firstItem="vAl-8m-bam" firstAttribute="trailing" secondItem="Jb1-J1-CjV" secondAttribute="trailing" constant="29" id="ZNO-ic-67C"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="leading" secondItem="vAl-8m-bam" secondAttribute="leading" constant="29" id="itm-MS-nWb"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="top" secondItem="vAl-8m-bam" secondAttribute="top" constant="42" id="lj9-B4-FhD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Upload" id="jdD-DT-ckK">
@@ -159,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag3-gR-LPE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005.7971014492755" y="179.34782608695653"/>
+            <point key="canvasLocation" x="2004.6153846153845" y="179.1469194312796"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="8wC-vH-MCK">
