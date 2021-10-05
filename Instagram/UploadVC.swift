@@ -15,6 +15,8 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var postButton: UIButton!
     var imageURL: URL!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +30,11 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
         let hideKeyboardRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(hideKeyboardRecognizer)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.imageView.image = UIImage(named: "image")
+        self.commentTextField.text = ""
+    }
 
     @IBAction func postButtonClicked(_ sender: Any) {
         let post = Post()
@@ -35,7 +42,23 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
             
             if storageMetadata != "" && imageUrl != ""{
                 
-                self.makeAlert(title: "Success", message: "Photo successfully posted.")
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let date = Date()
+                let dateString = dateFormatter.string(from: date)
+                
+                post.createPostDocument(postData: .init(postedBy: Auth.auth().currentUser!.email!, postedDate: dateString, imageURL: imageUrl, postLikes: 0,comment: self.commentTextField.text!)){
+                    errorMessage in
+                    
+                    if errorMessage == ""{
+                        
+                        self.makeAlert(title: "Success", message: "Post successfully uploaded")
+                    }
+                    
+                    else{
+                        self.makeAlert(title: "Errr", message: "Something Happened.")
+                    }
+                }
                 
             }else{
                 self.makeAlert(title: "Error", message: "Error when posting photo.")
@@ -58,7 +81,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
         self.imageURL = info[.imageURL] as? URL
         self.dismiss(animated: true, completion: nil)
     }
-    
+     
     @objc func hideKeyboard(){
         view.endEditing(true)
     }
