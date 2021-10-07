@@ -12,11 +12,11 @@ import FirebaseStorage
 
 
 struct PostData{
-    let postedBy: String
-    let postedDate: String
-    let imageURL : String
-    let postLikes: Int
-    let comment: String
+    var postedBy: String
+    var postedDate: String
+    var imageURL : String
+    var postLikes: Int
+    var comment: String
 }
 
 class Post{
@@ -66,5 +66,46 @@ class Post{
                 completion("")
             }
         })
+    }
+    
+    func getPostsFromFirestore(completion: @escaping (_ message:String, _ postData: [PostData])->Void){
+        firestoreDatabase.collection("Posts").addSnapshotListener { snapshot, error in
+            
+            if error != nil{
+                completion(error?.localizedDescription ?? "error",[])
+            }
+            else{
+                if snapshot?.isEmpty != true && snapshot != nil{
+                    var postList = Array<PostData>()
+                    for document in snapshot!.documents {
+                        var postDataStruct : PostData! = PostData(postedBy: "", postedDate: "", imageURL: "", postLikes: 0, comment: "")
+                        if let postLikes = document.get("postLikes") as? Int{
+                            postDataStruct.postLikes = postLikes
+                        }
+                        
+                        if let imageURL = document.get("imageURL") as? String{
+                            postDataStruct.imageURL = imageURL
+                        }
+                        
+                        if let postedDate = document.get("postedDate") as? String{
+                            postDataStruct.postedDate = postedDate
+                        }
+                        
+                        if let postedBy = document.get("postedBy") as? String{
+                            postDataStruct.postedBy = postedBy
+                        }
+                        
+                        if let comment = document.get("comment") as? String{
+                            postDataStruct.comment = comment
+                        }
+                        
+                        postList.append(postDataStruct)
+                    }
+                    
+                    completion("succes",postList)
+                }
+            }
+        }
+        
     }
 }
