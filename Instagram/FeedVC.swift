@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -19,6 +20,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let post = Post()
         post.getPostsFromFirestore { message, postsArray in
+            self.postsArray.removeAll(keepingCapacity: false)
             print(message)
             self.postsArray = postsArray
             self.postsFeedTableView.reloadData()
@@ -36,7 +38,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.postUserCommentTextField.text = postsArray[indexPath.row].comment
         cell.userMailTextField.text = postsArray[indexPath.row].postedBy
         cell.postLikesTextField.text = String(postsArray[indexPath.row].postLikes)
-        cell.postImageView.image = UIImage(named:"image")
+        cell.postImageView.sd_setImage(with: URL(string: postsArray[indexPath.row].imageURL))
         return cell
     }
     
