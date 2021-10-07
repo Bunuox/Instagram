@@ -15,6 +15,8 @@ class FeedPostCell: UITableViewCell{
     @IBOutlet weak var postLikeButton: UIButton!
     @IBOutlet weak var postUserCommentTextField: UILabel!
     
+    var postDocumentId : String = ""
+    
     var liked = 0
     
     override func awakeFromNib() {
@@ -33,13 +35,26 @@ class FeedPostCell: UITableViewCell{
         if(self.liked == 1) {
             self.postLikeButton.setImage(UIImage(systemName: "heart"),for: .normal)
             self.liked = 0
+            let post = Post()
+            post.dislikePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
+                
+                if error != "" {
+                    print("Something happened.")
+                }
+            }
         }
         
         else{
             self.postLikeButton.setImage(UIImage(systemName: "heart.fill"),for: .normal)
             self.liked = 1
+            
+            let post = Post()
+            post.likePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
+                
+                if error != "" {
+                    print("Something happened.")
+                }
+            }
         }
     }
-    
-
 }

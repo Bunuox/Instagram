@@ -68,17 +68,18 @@ class Post{
         })
     }
     
-    func getPostsFromFirestore(completion: @escaping (_ message:String, _ postData: [PostData])->Void){
+    func getPostsFromFirestore(completion: @escaping (_ message:String, _ postData: [PostData],[String])->Void){
         firestoreDatabase.collection("Posts").addSnapshotListener { snapshot, error in
-            
             if error != nil{
-                completion(error?.localizedDescription ?? "error",[])
+                completion(error?.localizedDescription ?? "error",[],[])
             }
             else{
                 if snapshot?.isEmpty != true && snapshot != nil{
                     var postList = Array<PostData>()
+                    var docIdList = Array<String>()
                     for document in snapshot!.documents {
                         var postDataStruct : PostData! = PostData(postedBy: "", postedDate: "", imageURL: "", postLikes: 0, comment: "")
+
                         if let postLikes = document.get("postLikes") as? Int{
                             postDataStruct.postLikes = postLikes
                         }
@@ -100,12 +101,38 @@ class Post{
                         }
                         
                         postList.append(postDataStruct)
+                        
+                        let documentId = document.documentID
+                        docIdList.append(documentId)
                     }
                     
-                    completion("succes",postList)
+                    completion("succes",postList,docIdList)
                 }
             }
         }
-        
+    }
+    
+    func likePost(documentId: String, currentLike: Int, completion: @escaping (_ error: String) -> Void){
+        let newLikeCount = ["postLikes": currentLike+1] as [String:Any]
+        firestoreDatabase.collection("Posts").document(documentId).setData(newLikeCount, merge: true, completion: { error in
+            if error != nil{
+                completion("Something happened")
+            }
+            else{
+                completion("")
+            }
+        })
+    }
+    
+    func dislikePost(documentId: String, currentLike: Int, completion: @escaping (_ error: String) -> Void){
+        let newLikeCount = ["postLikes": currentLike-1] as [String:Any]
+        firestoreDatabase.collection("Posts").document(documentId).setData(newLikeCount, merge: true, completion: { error in
+            if error != nil{
+                completion("Something happened")
+            }
+            else{
+                completion("")
+            }
+        })
     }
 }
