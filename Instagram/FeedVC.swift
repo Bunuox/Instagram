@@ -23,7 +23,6 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         post.getPostsFromFirestore { message, postsArray, documentIdArray in
             self.postsArray.removeAll(keepingCapacity: false)
             self.documentIdArray.removeAll(keepingCapacity: false)
-            print(message)
             self.postsArray = postsArray
             self.documentIdArray = documentIdArray
             self.postsFeedTableView.reloadData()

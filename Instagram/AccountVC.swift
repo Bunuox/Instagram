@@ -11,10 +11,22 @@ import FirebaseAuth
 
 class AccountVC: UIViewController {
 
+    @IBOutlet weak var userNameTextField: UILabel!
+    @IBOutlet weak var sexTextField: UILabel!
+    @IBOutlet weak var mailTextField: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let user = User()
+        user.getCurrentUserInfo { userData, err in
+            if err != nil {
+                print(err ?? "Error")
+            }else{
+                self.userNameTextField.text = userData?.userName
+                self.sexTextField.text = userData?.sex
+                self.mailTextField.text = userData?.email
+            }
+        }
     }
 
     @IBAction func logoutButtonClicked(_ sender: Any) {

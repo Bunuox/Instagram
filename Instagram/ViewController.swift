@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         
         if emailTextField.text != "" && passwordTextField.text != ""{
             let user = User()
-            user.userSignIn(email: emailTextField.text!, password: passwordTextField.text!) { message in
+            user.userSignIn(userData: .init(email: emailTextField.text!, password: passwordTextField.text!)) { message in
                 
                 if message != "success" {
                     self.makeAlert(title: "Error", message: message)

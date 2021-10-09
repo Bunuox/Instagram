@@ -25,12 +25,12 @@ class SignUpVC: UIViewController {
 
     @IBAction func signUpButtonClicked(_ sender: Any) {
         
-        if emailTextField.text != "" && passwordTextField.text != "" && confirmPasswordTextField.text != "" {
+        if emailTextField.text != "" && passwordTextField.text != "" && confirmPasswordTextField.text != "" && userNameTextField.text != "" {
             
             if passwordTextField.text == confirmPasswordTextField.text {
                 
                 let newUser = User()
-                newUser.userSingUp(email: emailTextField.text!, password: passwordTextField.text!){ (data) -> Void in
+                newUser.userSingUp(userData: .init(userName: userNameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!,sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex))){ (data) -> Void in
                     
                     if data == "success"{
                         self.makeAlert(title: "Success", message: "User Created")

@@ -9,37 +9,88 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
+struct UserData{
+    
+    var userId: String?
+    var userName : String!
+    var email : String!
+    var password: String!
+    var sex: String?
+}
+
 class User{
     
-    var email: String?
-    var password: String?
+    let firestoreDatabase = Firestore.firestore()
+    var firestoreReference : DocumentReference? = nil
     
-    func userSingUp(email:String, password:String, completion: @escaping (String) -> Void){
+    func userSingUp(userData: UserData, completion: @escaping (String) -> Void){
         
-        Auth.auth().createUser(withEmail: email, password: password) { (AuthDataResult, error) -> Void in
+        Auth.auth().createUser(withEmail: userData.email!, password: userData.password!) { (AuthDataResult, error) -> Void in
             
             if error != nil {
-                let success = error?.localizedDescription ?? "Error"
-                completion(success)
+                completion(error?.localizedDescription ?? "Error")
             }
             else{
-                let message = "success"
-                completion(message)
+                let userDocumentData = ["userName": userData.userName!,"email": userData.email!, "sex":userData.sex ?? "Not specified", "userId":AuthDataResult?.user.uid] as [String:Any]
+                
+                self.firestoreReference = self.firestoreDatabase.collection("Users").addDocument(data: userDocumentData, completion: { error in
+                    
+                    if error != nil{
+                        completion(error?.localizedDescription ?? "Error")
+                    }
+                    else{
+                        completion("success")
+                    }
+                })
             }
         }
         
     }
     
-    func userSignIn(email:String, password:String, completion: @escaping (String) -> Void){
+    func userSignIn(userData: UserData, completion: @escaping (String) -> Void){
         
-        Auth.auth().signIn(withEmail: email, password: password) { AuthDataResult, error in
+        Auth.auth().signIn(withEmail: userData.email!, password: userData.password!) { AuthDataResult, error in
             
             if error != nil{
                 let errorMessage = error?.localizedDescription ?? "Error"
                 completion(errorMessage)
+                
             }
             else{
                 completion("success")
+            }
+        }
+    }
+    
+    func getCurrentUserInfo(completion: @escaping(_ userData: UserData?, _ err : String?) -> Void){
+        let currentUser = Auth.auth().currentUser
+        
+        if currentUser != nil {
+            
+            let userId = currentUser?.uid
+            firestoreDatabase.collection("Users").whereField("userId",isEqualTo: userId!).getDocuments { querySnapshot, error in
+                
+                if error != nil {
+                    completion(nil,error?.localizedDescription ?? "")
+                }
+                else{
+                    
+                    var currentUserData = UserData()
+                    if let currentUserId = querySnapshot!.documents[0].get("userId") as? String{
+                        currentUserData.userId = currentUserId
+                    }
+                    
+                    if let currentUserEmail = querySnapshot!.documents[0].get("email") as? String{
+                        currentUserData.email = currentUserEmail
+                    }
+                    if let currentUserSex = querySnapshot!.documents[0].get("sex") as? String{
+                        currentUserData.sex = currentUserSex
+                    }
+                    if let currentUserUserName = querySnapshot!.documents[0].get("userName") as? String{
+                        currentUserData.userName = currentUserUserName
+                    }
+                    completion(currentUserData,nil)
+                }
             }
         }
     }
