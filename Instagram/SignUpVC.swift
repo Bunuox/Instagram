@@ -38,6 +38,7 @@ class SignUpVC: UIViewController {
                     else{
                         self.makeAlert(title: "Error", message: data)
                     }
+
                 }
                 
             }
@@ -58,11 +59,14 @@ class SignUpVC: UIViewController {
     func makeAlert(title:String, message:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
+        let okButton = UIAlertAction(title: "OK", style: .default, handler:{ alert in
+            self.performSegue(withIdentifier: "toSignInVC", sender: nil)
+        })
         alert.addAction(okButton)
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion:nil)
+        
     }
+    
     
     @objc func hideKeyboard(){
         view.endEditing(true)

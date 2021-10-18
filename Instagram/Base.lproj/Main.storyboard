@@ -18,18 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZUq-kT-rcz">
-                                <rect key="frame" x="35" y="109" width="320" height="34"/>
+                                <rect key="frame" x="35" y="153" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT7-GB-5SO">
-                                <rect key="frame" x="188.33333333333334" y="321" width="19" height="21"/>
+                                <rect key="frame" x="188.33333333333334" y="365" width="19" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w87-dj-iON">
-                                <rect key="frame" x="157" y="367" width="81.666666666666686" height="35"/>
+                                <rect key="frame" x="157" y="411" width="81.666666666666686" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Sign up"/>
                                 <connections>
@@ -37,12 +37,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password...." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PVS-64-DnF">
-                                <rect key="frame" x="35" y="192" width="320" height="34"/>
+                                <rect key="frame" x="35" y="236" width="320" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZN-g9-TEd">
-                                <rect key="frame" x="157" y="265" width="81.666666666666686" height="35"/>
+                                <rect key="frame" x="157" y="309" width="81.666666666666686" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
                                 <connections>
@@ -73,7 +73,7 @@
                         <outlet property="emailTextField" destination="ZUq-kT-rcz" id="F3u-Wh-rk6"/>
                         <outlet property="passwordTextField" destination="PVS-64-DnF" id="TyM-WT-yhx"/>
                         <segue destination="Pc8-gO-LF0" kind="presentation" identifier="toAppContentVC" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="RZr-Ne-stl"/>
-                        <segue destination="KzX-kJ-gKv" kind="show" identifier="toSignUpVC" id="rt3-4j-u5x"/>
+                        <segue destination="KzX-kJ-gKv" kind="showDetail" identifier="toSignUpVC" id="rt3-4j-u5x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -237,12 +237,12 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bht-f7-Kpz">
                                 <rect key="frame" x="12" y="247" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2zP-qF-Hf2">
                                 <rect key="frame" x="12" y="318" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u3-D8-qZP">
                                 <rect key="frame" x="165" y="468" width="84" height="35"/>
@@ -297,11 +297,12 @@
                         <outlet property="passwordTextField" destination="bht-f7-Kpz" id="gAY-0P-Lfl"/>
                         <outlet property="sexSegmentedControl" destination="tj1-uX-Pam" id="22y-pM-6MW"/>
                         <outlet property="userNameTextField" destination="uRC-xT-YyY" id="Num-6M-JE3"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toSignInVC" modalPresentationStyle="fullScreen" id="EFu-vY-aUA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQN-8P-svX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-33.333333333333336" y="509.51086956521743"/>
+            <point key="canvasLocation" x="-654" y="472"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="42x-Ab-fTq">
@@ -402,7 +403,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vLV-ta-XrH"/>
+        <segue reference="HvM-bS-gII"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.up.circle" catalog="system" width="128" height="121"/>

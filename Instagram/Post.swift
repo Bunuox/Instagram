@@ -69,7 +69,7 @@ class Post{
     }
     
     func getPostsFromFirestore(completion: @escaping (_ message:String, _ postData: [PostData],[String])->Void){
-        firestoreDatabase.collection("Posts").addSnapshotListener { snapshot, error in
+        firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).addSnapshotListener { snapshot, error in
             if error != nil{
                 completion(error?.localizedDescription ?? "error",[],[])
             }
@@ -84,7 +84,7 @@ class Post{
                             postDataStruct.postLikes = postLikes
                         }
                         
-                        if let imageURL = document.get("imageURL") as? String{
+                        if let imageURL = document.get("imageURL" ) as? String{
                             postDataStruct.imageURL = imageURL
                         }
                         
