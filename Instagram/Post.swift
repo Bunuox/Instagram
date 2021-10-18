@@ -12,6 +12,7 @@ import FirebaseStorage
 
 
 struct PostData{
+    var documentId: String?
     var postedBy: String
     var postedDate: String
     var imageURL : String
@@ -68,7 +69,7 @@ class Post{
         })
     }
     
-    func getPostsFromFirestore(completion: @escaping (_ message:String, _ postData: [PostData],[String])->Void){
+    func getAllPosts(completion: @escaping (_ message:String, _ postData: [PostData],[String])->Void){
         firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).addSnapshotListener { snapshot, error in
             if error != nil{
                 completion(error?.localizedDescription ?? "error",[],[])
@@ -112,13 +113,51 @@ class Post{
         }
     }
     
+    func getPostsByUserMail(userMail: String, completion: @escaping (_ posts:[PostData], _ message:String) -> Void){
+        firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).whereField("postedBy", isEqualTo: userMail).addSnapshotListener { snapshot, error in
+            
+            if error != nil {
+                completion([],error?.localizedDescription ?? "Error")
+            }else{
+                var postList = Array<PostData>()
+                for document in snapshot!.documents {
+                    var postDataStruct = PostData(postedBy: "", postedDate: "", imageURL: "", postLikes: 0, comment: "")
+                    
+                    if let postLikes = document.get("postLikes") as? Int{
+                        postDataStruct.postLikes = postLikes
+                    }
+                    
+                    if let imageURL = document.get("imageURL" ) as? String{
+                        postDataStruct.imageURL = imageURL
+                    }
+                    
+                    if let postedDate = document.get("postedDate") as? String{
+                        postDataStruct.postedDate = postedDate
+                    }
+                    
+                    if let postedBy = document.get("postedBy") as? String{
+                        postDataStruct.postedBy = postedBy
+                    }
+                    
+                    if let comment = document.get("comment") as? String{
+                        postDataStruct.comment = comment
+                    }
+                    
+                    postDataStruct.documentId = document.documentID
+                    postList.append(postDataStruct)
+                }
+                
+                completion(postList,"Success")
+            }
+        }
+    }
+
     func likePost(documentId: String, currentLike: Int, completion: @escaping (_ error: String) -> Void){
         let newLikeCount = ["postLikes": currentLike+1] as [String:Any]
         firestoreDatabase.collection("Posts").document(documentId).setData(newLikeCount, merge: true, completion: { error in
             if error != nil{
                 completion("Something happened")
-            }
-            else{
+            }else{
                 completion("")
             }
         })

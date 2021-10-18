@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag3-gR-LPE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2051" y="789"/>
+            <point key="canvasLocation" x="2081" y="832"/>
         </scene>
         <!--Search-->
         <scene sceneID="1Ww-L1-UeJ">
@@ -296,6 +296,7 @@
                         <outlet property="searchButton" destination="Rv6-ts-zmq" id="Udy-Bc-2PI"/>
                         <outlet property="searchResultTableView" destination="cT4-wn-96U" id="Kyd-QB-JzC"/>
                         <outlet property="searchTextField" destination="Aa7-Ae-QUd" id="WLm-Oa-Ulh"/>
+                        <segue destination="HuH-bK-E1p" kind="show" identifier="toAccountVC" id="Mmi-Ae-nXr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DOk-zA-JHd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -434,33 +435,89 @@
             <objects>
                 <viewController id="HuH-bK-E1p" customClass="AccountVC" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kl6-Ve-SB1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNR-16-g38">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNR-16-g38">
                                 <rect key="frame" x="316" y="20" width="78" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                 <connections>
                                     <action selector="logoutButtonClicked:" destination="HuH-bK-E1p" eventType="touchUpInside" id="Evc-Xa-skD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ9-Uu-ahU">
-                                <rect key="frame" x="35" y="115" width="359" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyF-Xh-YYO">
-                                <rect key="frame" x="35" y="201" width="359" height="24"/>
+                                <rect key="frame" x="60" y="95" width="324" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GYS-cq-Lfj">
+                                <rect key="frame" x="2" y="158" width="396" height="542"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedPostCell" rowHeight="481" id="NYf-kS-M8D" customClass="FeedPostCell" customModule="Instagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="396" height="481"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NYf-kS-M8D" id="w13-l4-5Rv" customClass="FeedPostCell" customModule="Instagram" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="396" height="481"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17p-yc-3hI">
+                                                    <rect key="frame" x="22" y="373" width="374" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ucr-n8-nlC">
+                                                    <rect key="frame" x="20" y="58" width="364" height="289"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXd-TP-Dic">
+                                                    <rect key="frame" x="330" y="384" width="28" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postImageView" destination="Ucr-n8-nlC" id="7fJ-vj-sEB"/>
+                                            <outlet property="postLikesTextField" destination="lXd-TP-Dic" id="E1u-bb-izg"/>
+                                            <outlet property="postUserCommentTextField" destination="17p-yc-3hI" id="syz-oY-7P9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mlf-CE-HlV">
-                                <rect key="frame" x="35" y="291" width="345" height="26"/>
+                                <rect key="frame" x="60" y="124" width="324" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vld-qM-p6p">
+                                <rect key="frame" x="17" y="63" width="27" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageReference key="image" image="person" catalog="system"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hj-nc-aVe">
+                                <rect key="frame" x="17" y="96.666666666666856" width="27" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageReference key="image" image="mail.stack" catalog="system"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anE-sV-PjI">
+                                <rect key="frame" x="17" y="125.66666666666652" width="27" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageReference key="image" image="person.2" catalog="system"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ9-Uu-ahU">
+                                <rect key="frame" x="60" y="63" width="324" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -469,28 +526,27 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7kT-Rw-qgg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="lNR-16-g38" firstAttribute="top" secondItem="7kT-Rw-qgg" secondAttribute="top" constant="20" id="5dQ-p7-hkf"/>
-                            <constraint firstItem="lNR-16-g38" firstAttribute="trailing" secondItem="kl6-Ve-SB1" secondAttribute="trailingMargin" id="rxk-Kd-u9v"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Account" id="fxj-8n-aTf">
                         <imageReference key="image" image="person" catalog="system"/>
                     </tabBarItem>
+                    <navigationItem key="navigationItem" id="a2l-KD-Ec4"/>
                     <connections>
+                        <outlet property="logoutButton" destination="lNR-16-g38" id="efx-Sw-2eG"/>
                         <outlet property="mailTextField" destination="zyF-Xh-YYO" id="exs-9W-uoc"/>
                         <outlet property="sexTextField" destination="Mlf-CE-HlV" id="LKk-Wg-9wK"/>
                         <outlet property="userNameTextField" destination="UZ9-Uu-ahU" id="6Jk-RR-QmP"/>
+                        <outlet property="userPostTableView" destination="GYS-cq-Lfj" id="DIR-og-8wo"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="toViewController" modalPresentationStyle="fullScreen" id="vLV-ta-XrH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4z-of-Plx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="457" y="471"/>
+            <point key="canvasLocation" x="737.68115942028987" y="526.63043478260875"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RZr-Ne-stl"/>
+        <segue reference="Mmi-Ae-nXr"/>
         <segue reference="vLV-ta-XrH"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -499,8 +555,10 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="image" width="307" height="310"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="mail.stack" catalog="system" width="128" height="122"/>
         <image name="pencil.slash" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

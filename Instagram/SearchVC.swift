@@ -13,8 +13,9 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    var userList = Array<UserData>()
     
+    var userList = Array<UserData>()
+    var searchedUser = UserData()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +37,12 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.textLabel?.text = userList[indexPath.row].userName
+        if userList[indexPath.row].userName != "User not found"{
+            cell.textLabel?.text = "Go to @"+userList[indexPath.row].userName
+        }
+        else{
+            cell.textLabel?.text = userList[indexPath.row].userName
+        }
         return cell
     }
     
@@ -62,13 +68,22 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     @IBAction func cancelButtonClicked(_ sender: Any) {
-        view.endEditing(true)
-    }
-    @objc func hideKeyboard(){
+        self.userList.removeAll(keepingCapacity: false)
+        self.searchTextField.text = ""
+        self.searchResultTableView.reloadData()
         view.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected")
+        self.searchedUser = userList[indexPath.row]
+        performSegue(withIdentifier: "toAccountVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAccountVC"{
+            if let VC = segue.destination as? AccountVC{
+                VC.searchedUser = self.searchedUser
+            }
+        }
     }
 }

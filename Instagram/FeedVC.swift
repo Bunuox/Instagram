@@ -20,7 +20,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         postsFeedTableView.dataSource = self
         
         let post = Post()
-        post.getPostsFromFirestore { message, postsArray, documentIdArray in
+        post.getAllPosts { message, postsArray, documentIdArray in
             self.postsArray.removeAll(keepingCapacity: false)
             self.documentIdArray.removeAll(keepingCapacity: false)
             self.postsArray = postsArray
