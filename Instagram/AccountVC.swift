@@ -18,7 +18,8 @@ class AccountVC: UIViewController {
         super.viewDidLoad()
 
         let user = User()
-        user.getCurrentUserInfo { userData, err in
+        let currentUserId = Auth.auth().currentUser?.uid
+        user.getUserInfo(userId: currentUserId!){ userData, err in
             if err != nil {
                 print(err ?? "Error")
             }else{
