@@ -69,7 +69,7 @@ class User{
         if currentUser != nil {
             
             let userId = userId
-            firestoreDatabase.collection("Users").whereField("userId",isEqualTo: userId).getDocuments { querySnapshot, error in
+            firestoreDatabase.collection("Users").whereField("userId",isEqualTo: userId).addSnapshotListener { querySnapshot, error in
                 
                 if error != nil {
                     completion(nil,error?.localizedDescription ?? "")

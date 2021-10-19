@@ -38,8 +38,7 @@ class ViewController: UIViewController {
                 }
             }
         }else{
-            
-            
+            self.makeAlert(title: "Error", message: "Please fill fields")
         }
     }
     

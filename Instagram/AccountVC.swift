@@ -18,32 +18,19 @@ class AccountVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var userPostTableView: UITableView!
     
     var searchedUser : UserData?
+    var currentUser = Auth.auth().currentUser
     var userPosts = Array<PostData>()
+    let user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadCurrentUserData()
+        loadUserPosts()
         
         self.userPostTableView.delegate = self
         self.userPostTableView.dataSource = self
 
-        let user = User()
-        let currentUserId = Auth.auth().currentUser?.uid
-        if searchedUser?.userName == ""{
-            user.getUserInfo(userId: currentUserId!){ userData, err in
-                if err != nil {
-                    print(err ?? "Error")
-                }else{
-                    self.userNameTextField.text = userData?.userName
-                    self.sexTextField.text = userData?.sex
-                    self.mailTextField.text = userData?.email
-                }
-            }
-        }
-        else{
-            self.logoutButton.isHidden = true
-            self.userNameTextField.text = searchedUser?.userName
-            self.sexTextField.text = searchedUser?.sex
-            self.mailTextField.text = searchedUser?.email
-        }
     }
 
     @IBAction func logoutButtonClicked(_ sender: Any) {
@@ -69,25 +56,53 @@ class AccountVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        let post = Post()
-        if searchedUser?.userName == ""{
-            post.getPostsByUserMail(userMail: userNameTextField.text!) { posts, message in
-                if message == "Success"{
-                    self.userPosts.removeAll(keepingCapacity: false)
-                    self.userPosts = posts
-                    self.userPostTableView.reloadData()
-                }
+    func loadCurrentUserData(){
+        
+        if searchedUser?.userName != nil {
+            self.userNameTextField.text = searchedUser!.userName
+            self.mailTextField.text = searchedUser!.email
+            self.sexTextField.text = searchedUser!.sex
+        }
+        
+        self.user.getUserInfo(userId: currentUser!.uid) { userData, err in
+            if err == nil{
+                self.userNameTextField.text = userData!.userName
+                self.mailTextField.text = userData!.email
+                self.sexTextField.text = userData!.sex
             }
-        }else{
-            post.getPostsByUserMail(userMail: searchedUser!.email) { posts, message in
+        }
+    }
+    
+    func loadUserPosts(){
+        let post = Post()
+        if searchedUser?.userName == nil {
+            post.getPostsByUserMail(userMail: self.currentUser!.email!) { posts, message in
                 if message == "Success"{
                     self.userPosts.removeAll(keepingCapacity: false)
                     self.userPosts = posts
                     self.userPostTableView.reloadData()
+                    }
+                }
+
+        }else{
+            post.getPostsByUserMail(userMail: self.searchedUser!.email){ posts, message in
+                if message == "Success"{
+                    self.userPosts.removeAll(keepingCapacity: false)
+                    self.userPosts = posts
+                    self.userPostTableView.reloadData()
+                    
+                    self.logoutButton.isHidden = true
+                    self.userNameTextField.text = self.searchedUser?.userName
+                    self.sexTextField.text = self.searchedUser?.sex
+                    self.mailTextField.text = self.searchedUser?.email
+                    
                 }
             }
         }
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
         self.userPostTableView.rowHeight = 481
     }
+    
 }

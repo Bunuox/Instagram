@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Firebase
 
 class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
