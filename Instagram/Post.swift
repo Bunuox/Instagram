@@ -24,6 +24,7 @@ class Post{
     
     let firestoreDatabase = Firestore.firestore()
     var firestoreReference : DocumentReference? = nil
+    var userData = ""
     
     func uploadPost(image: UIImage?, storeRefName: String, imageURL: URL?, completion: @escaping (_ storageMetadata:String,_ imageUrl:String) -> Void){
         
@@ -94,7 +95,14 @@ class Post{
                         }
                         
                         if let postedBy = document.get("postedBy") as? String{
-                            postDataStruct.postedBy = postedBy
+                            let user = User()
+                            
+                            user.getUserInfo(userId: postedBy) { userData, err in
+                                if err == nil {
+                                    self.userData = userData!.userName
+                                }
+                            }
+                            print(self.userData)
                         }
                         
                         if let comment = document.get("comment") as? String{
@@ -113,8 +121,8 @@ class Post{
         }
     }
     
-    func getPostsByUserMail(userMail: String, completion: @escaping (_ posts:[PostData], _ message:String) -> Void){
-        firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).whereField("postedBy", isEqualTo: userMail).addSnapshotListener { snapshot, error in
+    func getPostsByUserId(userId: String, completion: @escaping (_ posts:[PostData], _ message:String) -> Void){
+        firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).whereField("postedBy", isEqualTo: userId).addSnapshotListener { snapshot, error in
             
             if error != nil {
                 completion([],error?.localizedDescription ?? "Error")

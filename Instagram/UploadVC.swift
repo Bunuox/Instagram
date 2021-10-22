@@ -47,7 +47,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate,UINavigationCo
                 let date = Date()
                 let dateString = dateFormatter.string(from: date)
                 
-                post.createPostDocument(postData: .init(postedBy: Auth.auth().currentUser!.email!, postedDate: dateString, imageURL: imageUrl, postLikes: 0,comment: self.commentTextField.text!)){
+                post.createPostDocument(postData: .init(postedBy: Auth.auth().currentUser!.uid, postedDate: dateString, imageURL: imageUrl, postLikes: 0,comment: self.commentTextField.text!)){
                     errorMessage in
                     
                     if errorMessage == ""{

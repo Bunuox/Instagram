@@ -69,6 +69,7 @@ class AccountVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.userNameTextField.text = userData!.userName
                 self.mailTextField.text = userData!.email
                 self.sexTextField.text = userData!.sex
+            
             }
         }
     }
@@ -76,7 +77,7 @@ class AccountVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func loadUserPosts(){
         let post = Post()
         if searchedUser?.userName == nil {
-            post.getPostsByUserMail(userMail: self.currentUser!.email!) { posts, message in
+            post.getPostsByUserId(userId: self.currentUser!.uid) { posts, message in
                 if message == "Success"{
                     self.userPosts.removeAll(keepingCapacity: false)
                     self.userPosts = posts
@@ -85,7 +86,7 @@ class AccountVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
 
         }else{
-            post.getPostsByUserMail(userMail: self.searchedUser!.email){ posts, message in
+            post.getPostsByUserId(userId: self.searchedUser!.userId){ posts, message in
                 if message == "Success"{
                     self.userPosts.removeAll(keepingCapacity: false)
                     self.userPosts = posts
