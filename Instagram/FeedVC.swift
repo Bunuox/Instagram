@@ -14,19 +14,45 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var postsFeedTableView: UITableView!
     var postsArray: [PostData] = []
     var documentIdArray : [String] = []
+    var userDetails = UserData()
+    let user = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         postsFeedTableView.delegate = self
         postsFeedTableView.dataSource = self
         
+        getAllPosts()
+    }
+    
+    func getAllPosts(){
+        
         let post = Post()
         post.getAllPosts { message, postsArray, documentIdArray in
-            self.postsArray.removeAll(keepingCapacity: false)
-            self.documentIdArray.removeAll(keepingCapacity: false)
-            self.postsArray = postsArray
-            self.documentIdArray = documentIdArray
-            self.postsFeedTableView.reloadData()
+            
+            if message == nil {
+                
+                self.postsArray.removeAll(keepingCapacity: false)
+                self.documentIdArray.removeAll(keepingCapacity: false)
+
+                self.postsArray = postsArray
+                self.documentIdArray = documentIdArray
+                self.postsPostedByChange(postsArray: postsArray)
+                self.postsFeedTableView.reloadData()
+            }
+        }
+    }
+    
+    func postsPostedByChange(postsArray : [PostData]){
+        
+        for i in 0 ... postsArray.count-1{
+            user.getUserInfo(userId: postsArray[i].postedBy) { userData, err in
+                if err == nil {
+                    self.postsArray[i].postedBy = userData!.userName
+                    self.postsFeedTableView.reloadData()
+                }
+            }
         }
     }
     

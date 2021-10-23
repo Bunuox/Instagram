@@ -70,7 +70,7 @@ class Post{
         })
     }
     
-    func getAllPosts(completion: @escaping (_ message:String, _ postData: [PostData],[String])->Void){
+    func getAllPosts(completion: @escaping (_ message:String?, _ postData: [PostData],[String])->Void){
         firestoreDatabase.collection("Posts").order(by: "postedDate", descending: true).addSnapshotListener { snapshot, error in
             if error != nil{
                 completion(error?.localizedDescription ?? "error",[],[])
@@ -95,14 +95,7 @@ class Post{
                         }
                         
                         if let postedBy = document.get("postedBy") as? String{
-                            let user = User()
-                            
-                            user.getUserInfo(userId: postedBy) { userData, err in
-                                if err == nil {
-                                    self.userData = userData!.userName
-                                }
-                            }
-                            print(self.userData)
+                            postDataStruct.postedBy = postedBy
                         }
                         
                         if let comment = document.get("comment") as? String{
@@ -115,7 +108,7 @@ class Post{
                         docIdList.append(documentId)
                     }
                     
-                    completion("succes",postList,docIdList)
+                    completion(nil,postList,docIdList)
                 }
             }
         }
