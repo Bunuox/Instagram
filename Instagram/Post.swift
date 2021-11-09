@@ -109,6 +109,8 @@ class Post{
                     }
                     
                     completion(nil,postList,docIdList)
+                }else{
+                    completion(nil,[],[])
                 }
             }
         }
@@ -165,7 +167,15 @@ class Post{
     }
     
     func dislikePost(documentId: String, currentLike: Int, completion: @escaping (_ error: String) -> Void){
-        let newLikeCount = ["postLikes": currentLike-1] as [String:Any]
+        
+        var newLikeCount = ["":""] as [String:Any]
+        
+        if currentLike <= 0{
+            newLikeCount = ["postLikes": 0] as [String:Any]
+        }else{
+            newLikeCount = ["postLikes": currentLike-1] as [String:Any]
+        }
+
         firestoreDatabase.collection("Posts").document(documentId).setData(newLikeCount, merge: true, completion: { error in
             if error != nil{
                 completion("Something happened")

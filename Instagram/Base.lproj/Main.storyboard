@@ -171,14 +171,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyP-en-S26">
-                                <rect key="frame" x="20" y="453" width="374" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlu-ej-F1X">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlu-ej-F1X">
                                 <rect key="frame" x="179" y="535" width="58" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="bUj-Eg-99L"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Post"/>
                                 <connections>
@@ -186,21 +183,30 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-J1-CjV">
-                                <rect key="frame" x="29" y="42" width="356" height="372"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="372" id="wMM-aS-OLU"/>
-                                </constraints>
+                                <rect key="frame" x="29" y="7" width="356" height="372"/>
                                 <imageReference key="image" image="image"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyP-en-S26">
+                                <rect key="frame" x="20" y="407" width="374" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="EXC-9b-TEy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vAl-8m-bam"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="nyP-en-S26" firstAttribute="top" secondItem="Jb1-J1-CjV" secondAttribute="bottom" constant="39" id="0Zl-IB-TlV"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="centerX" secondItem="nyP-en-S26" secondAttribute="centerX" id="ExU-0K-fRG"/>
-                            <constraint firstItem="vAl-8m-bam" firstAttribute="trailing" secondItem="Jb1-J1-CjV" secondAttribute="trailing" constant="29" id="ZNO-ic-67C"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="leading" secondItem="vAl-8m-bam" secondAttribute="leading" constant="29" id="itm-MS-nWb"/>
-                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="top" secondItem="vAl-8m-bam" secondAttribute="top" constant="42" id="lj9-B4-FhD"/>
+                            <constraint firstItem="nyP-en-S26" firstAttribute="leading" secondItem="dN6-nv-8JY" secondAttribute="leadingMargin" id="0Sm-Jr-xx5"/>
+                            <constraint firstItem="nyP-en-S26" firstAttribute="trailing" secondItem="dN6-nv-8JY" secondAttribute="trailingMargin" id="65Z-Vh-Mu6"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="leading" secondItem="vAl-8m-bam" secondAttribute="leading" constant="29" id="TXn-Sg-Ack"/>
+                            <constraint firstItem="nyP-en-S26" firstAttribute="top" secondItem="Jb1-J1-CjV" secondAttribute="bottom" constant="28" id="Vle-cl-sKN"/>
+                            <constraint firstItem="Vlu-ej-F1X" firstAttribute="top" secondItem="nyP-en-S26" secondAttribute="bottom" constant="94" id="YaK-ea-yiJ"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="centerX" secondItem="nyP-en-S26" secondAttribute="centerX" id="bLH-li-RUk"/>
+                            <constraint firstItem="Vlu-ej-F1X" firstAttribute="leading" secondItem="vAl-8m-bam" secondAttribute="leading" constant="179" id="jCo-qI-CD1"/>
+                            <constraint firstItem="Jb1-J1-CjV" firstAttribute="top" secondItem="vAl-8m-bam" secondAttribute="top" constant="7" id="xdx-bY-7wY"/>
+                            <constraint firstItem="vAl-8m-bam" firstAttribute="bottom" secondItem="Vlu-ej-F1X" secondAttribute="bottom" constant="117" id="xer-f8-PJs"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Upload" id="jdD-DT-ckK">
@@ -446,7 +452,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GYS-cq-Lfj">
-                                <rect key="frame" x="2" y="158" width="396" height="542"/>
+                                <rect key="frame" x="2" y="228" width="396" height="472"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -525,6 +531,13 @@
                                     <action selector="logoutButtonClicked:" destination="HuH-bK-E1p" eventType="touchUpInside" id="Evc-Xa-skD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-BS-D3z">
+                                <rect key="frame" x="20" y="195" width="82" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7kT-Rw-qgg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

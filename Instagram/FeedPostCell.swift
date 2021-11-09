@@ -16,9 +16,7 @@ class FeedPostCell: UITableViewCell{
     @IBOutlet weak var postUserCommentTextField: UILabel!
     
     var postDocumentId : String = ""
-    
-    var liked = 0
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,29 +30,32 @@ class FeedPostCell: UITableViewCell{
 
     @IBAction func likeButtonClicked(_ sender: Any) {
         
-        if(self.liked == 1) {
-            self.postLikeButton.setImage(UIImage(systemName: "heart"),for: .normal)
-            self.liked = 0
+        if self.postLikeButton.currentImage == UIImage(systemName: "heart.fill"){
             let post = Post()
-            post.dislikePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
-                
-                if error != "" {
-                    print("Something happened.")
+            DispatchQueue.main.async {
+                post.dislikePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
+                    
+                    if error != "" {
+                        print("Something happened.")
+                    }
                 }
             }
+            self.postLikeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
         
         else{
-            self.postLikeButton.setImage(UIImage(systemName: "heart.fill"),for: .normal)
-            self.liked = 1
-            
             let post = Post()
-            post.likePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
-                
-                if error != "" {
-                    print("Something happened.")
+            
+            DispatchQueue.main.async {
+                post.likePost(documentId: self.postDocumentId, currentLike: Int(self.postLikesTextField.text!)!) { error in
+                    
+                    if error != "" {
+                        print("Something happened.")
+                    }
                 }
             }
+  
+            self.postLikeButton.setImage(UIImage(systemName: "heart.fill"),for: .normal)
         }
     }
 }

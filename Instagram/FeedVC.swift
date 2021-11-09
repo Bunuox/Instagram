@@ -31,8 +31,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let post = Post()
         post.getAllPosts { message, postsArray, documentIdArray in
             
-            if message == nil {
-                
+            if message == nil && postsArray.isEmpty == false{
                 self.postsArray.removeAll(keepingCapacity: false)
                 self.documentIdArray.removeAll(keepingCapacity: false)
 
